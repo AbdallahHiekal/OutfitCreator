@@ -1,0 +1,56 @@
+﻿@model Outfit
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">A random Outfit</h1>
+    <hr />
+    <form method="get" asp-action="Index">
+        <select asp-for="Gender">
+            <option value="FEMALE">FEMALE</option>
+            <option value="MALE">MALE</option>
+        </select>
+        <button type="submit"> Generate Outfit</button>
+    </form>
+    <div class="row">
+        @if (Model != null)
+        {
+            var Variant = Model.Accessory.Variants.FirstOrDefault();
+            <div class="col-md-4">
+                <h4>Accessory</h4>
+                @if (Variant != null && Variant.Images.FirstOrDefault() != null)
+                {
+                    <img src="https://api.newyorker.de/csp/images/image/public/@Variant.Images.FirstOrDefault().Key?res=mid&frame=_1" />
+                }
+                <p>Product Id: <a asp-action="ProductDetails" asp-route-Id="@Model.Accessory.Id">@Model.Accessory.Id</a></p>
+                <p>Product Brand: @Model.Accessory.Brand</p>
+            </div>
+            Variant = Model.Outerwear.Variants.FirstOrDefault();
+            <div class="col-md-4">
+                <h4>Outerwear</h4>
+                @if (Variant != null && Variant.Images.FirstOrDefault() != null)
+                {
+                    <img src="https://api.newyorker.de/csp/images/image/public/@Variant.Images.FirstOrDefault().Key?res=mid&frame=_1" />
+                }
+                <p>Product Id: <a asp-action="ProductDetails" asp-route-Id="@Model.Outerwear.Id">@Model.Outerwear.Id</a></p>
+                <p>Product Brand: @Model.Outerwear.Brand</p>
+            </div>
+            Variant = Model.Underwear.Variants.FirstOrDefault();
+            <div class="col-md-4">
+                <h4>Underwear</h4>
+                @if (Variant != null && Variant.Images.FirstOrDefault() != null)
+                {
+                    <img src="https://api.newyorker.de/csp/images/image/public/@Variant.Images.FirstOrDefault().Key?res=mid&frame=_1" />
+                }
+                <p>Product Id: <a asp-action="ProductDetails" asp-route-Id="@Model.Underwear.Id">@Model.Underwear.Id</a></p>
+                <p>Product Brand: @Model.Underwear.Brand</p>
+            </div>
+        }
+        else
+        {
+            <h1 class="display-4">Error</h1>
+            <p>We are sorry, There's some Error'</p>
+        }
+    </div>
+</div>

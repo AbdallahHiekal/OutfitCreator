@@ -1,0 +1,22 @@
+﻿@model Product
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    var Variant = Model.Variants.FirstOrDefault();
+}
+<h4>@Model.Id</h4>
+@if (Variant != null && Variant.Images.FirstOrDefault() != null)
+{
+    <img src="https://api.newyorker.de/csp/images/image/public/@Variant.Images.FirstOrDefault().Key?res=high&frame=_1" />
+}
+<p>Product Id: @Model.Web_category</p>
+<p>Product Brand: @Model.Brand</p>
+<hr />
+@foreach (var vari in Model.Variants)
+{
+    <span>variant Id: @vari.Id</span>
+    <span>variant price: @vari.Current_price</span>
+    <span>variant color name: @vari.Color_name</span>
+    <hr />
+}
